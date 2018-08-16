@@ -141,7 +141,7 @@
       },
 
       getNewsList(){
-        this.axios.get('http://localhost:8080/getOrg?id=01').then((response)=>{
+        this.$axios.get('gp/getOrg?id=01').then((response)=>{
          // alert(response.data.data);
           console.log("123");
           console.log(response);
