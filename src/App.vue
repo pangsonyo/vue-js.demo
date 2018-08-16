@@ -20,7 +20,7 @@
 
       <el-container>
         <el-aside width="200px">
-          <el-menu :default-openeds="['1', '3']" background-color="">
+          <el-menu :default-openeds="['1', '3']" background-color="#323a57" text-color="white">
             <el-submenu index="1">
               <template slot="title"><i class="el-icon-message"></i>导航一</template>
               <el-menu-item-group>
