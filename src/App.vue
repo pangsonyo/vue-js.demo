@@ -11,7 +11,7 @@
           background-color=""
           text-color="red"
           active-text-color="black">
-          <el-menu-item index="1" style="margin-left:0px;">处理中心</el-menu-item>
+          <el-menu-item index="1" style="margin-left:0px;" @click="getNewsList()">处理中心</el-menu-item>
           <el-menu-item index="2" style="">1231231</el-menu-item>
           <el-menu-item index="3" style="background-color:rosybrown">消息中心</el-menu-item>
           <el-menu-item index="4"style="background-color: blanchedalmond">XXXXxx</el-menu-item>
@@ -138,7 +138,19 @@
         } else {
           this.$refs.multipleTable.clearSelection();
         }
-      }
+      },
+
+      getNewsList(){
+        this.axios.get('http://localhost:8080/getOrg?id=01').then((response)=>{
+         // alert(response.data.data);
+          console.log("123");
+          console.log(response);
+        }).catch((response)=>{
+          console.log(response);
+        })
+
+      },
+
     }
 
     //name: 'App'
