@@ -39,7 +39,13 @@
               <!--<el-menu-item :index=item.menuID v-else>{{item.name}}</el-menu-item>-->
             <!--</template>-->
           <!--</el-menu>-->
-
+         <el-menu>
+          <el-menu-item :index="item.id"
+          v-for="(item,index) in menuList"
+          v-bind:key="item.productId"
+          >{{item.productName}}
+          </el-menu-item>
+         </el-menu>
 
         </el-aside>
 
@@ -79,6 +85,7 @@
       return {
         activeIndex: '1',
         activeIndex2: '1',
+        menuList:'',
         tableData: [{
           date: '2016-05-03',
           name: '王小虎',
@@ -97,14 +104,6 @@
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }]
@@ -139,12 +138,14 @@
         // })
       },
 
-      //点击导航按钮 请求资源 并获取列表
+      //点击导航按钮 请求资源 并获取列表XWQ
       handleSelect(key, keyPath) {
         //console.log(key, keyPath);
         this.$axios.get('static/list.json').then(res=>{
-          console.log(res.data.result)
 
+          const _self  = this;
+          _self.menuList = res.data.result;
+          console.log( _self.menuList);
 
         })
       }
