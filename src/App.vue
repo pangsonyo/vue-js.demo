@@ -11,18 +11,39 @@
           background-color=""
           text-color="red"
           active-text-color="black">
-          <el-menu-item index="1" style="margin-left:0px;" ><a href="#/dealCenter">处理中心</a></el-menu-item>
-          <el-menu-item index="2" style="">1231231</el-menu-item>
-          <el-menu-item index="3" style="background-color:rosybrown">消息中心</el-menu-item>
-          <el-menu-item index="4" style="background-color: blanchedalmond">XXXXxx</el-menu-item>
+          <el-menu-item index="dealCenter" style="margin-left:0px;">处理中心</el-menu-item>
+          <el-menu-item index="2csd" style="">1231231</el-menu-item>
+          <el-menu-item index="messageCenter" style="background-color:rosybrown">消息中心</el-menu-item>
+          <el-menu-item index="74" style="background-color: blanchedalmond">XXXXxx</el-menu-item>
         </el-menu>
       </el-header>
 
+<!--左侧栏-->
       <el-container>
-        <el-aside width="200px">
-          <!--<left></left>-->
-          <router-view></router-view>
+        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+
+          <!--<el-menu-->
+            <!--theme="dark"-->
+            <!--:default-active="openMenuID"-->
+            <!--:default-openeds="openMenuArr"-->
+            <!--class="el-menu"-->
+            <!--@select="handleSelect">-->
+            <!--<template v-for="(item,index) in menuList">-->
+              <!--<el-submenu :index=item.menuID v-if="item.IsContent">-->
+                <!--<template slot="title">-->
+                  <!--<i class="el-icon-menu"></i>-->
+                  <!--{{item.name}}-->
+                <!--</template>-->
+                <!--<tree-menu :data="item.list"></tree-menu>-->
+              <!--</el-submenu>-->
+              <!--<el-menu-item :index=item.menuID v-else>{{item.name}}</el-menu-item>-->
+            <!--</template>-->
+          <!--</el-menu>-->
+
+
         </el-aside>
+
+
         <el-main>
           <el-table :data="tableData"
                     tooltip-effect="dark"
@@ -41,6 +62,9 @@
         </el-main>
       </el-container>
     </el-container>
+
+
+
 
     <!--<router-view/>-->
   </div>
@@ -114,9 +138,18 @@
         //   console.log('请求失败：'+resp.status+','+resp.statusText);
         // })
       },
+
+      //点击导航按钮 请求资源 并获取列表
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
+        this.$axios.get('static/list.json').then(res=>{
+          console.log(res.data.result)
+
+
+        })
       }
+
+
     }
 
     //name: 'App'
