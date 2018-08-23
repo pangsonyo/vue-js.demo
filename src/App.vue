@@ -20,6 +20,7 @@
 
       <el-container>
         <el-aside width="200px">
+          <!--<left></left>-->
           <router-view></router-view>
         </el-aside>
         <el-main>
@@ -46,6 +47,7 @@
 </template>
 
 <script>
+ // import left from "./components/DealCenter"
   export default {
 
     data() {
@@ -84,6 +86,9 @@
         }]
       };
     },
+    // components:{
+    //   left,
+    // },
     methods: {
       toggleSelection(rows) {
         if (rows) {
