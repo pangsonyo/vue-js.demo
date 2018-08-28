@@ -5,13 +5,15 @@
       "productId":"10001",
       "productName":"小米6",
       "prodcutPrice":"2499",
-      "prodcutImg":"mi6.jpg"
+      "prodcutImg":"mi6.jpg",
+      "href":"#/dealCenter"
     },
     {
       "productId":"10002",
       "productName":"小米笔记本",
       "prodcutPrice":"3999",
-      "prodcutImg":"note.jpg"
+      "prodcutImg":"note.jpg",
+      "href":"#/tableTest"
     },
     {
       "productId":"10003",

@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import HelloWorld from '@/components/HelloWorld'
 import DealCenter from '@/components/DealCenter'
 import Register from '@/components/Login'
+import TableTest from '@/views/tableTest'
 Vue.use(VueRouter)
 
 
@@ -22,6 +23,14 @@ let routes = [
         requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
       },
       component: DealCenter
+    },
+    {
+      path: '/tableTest',
+      name: 'TableTest',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      },
+      component: TableTest
     },
     {
       path: '/Register',

@@ -11,7 +11,7 @@
           background-color=""
           text-color="red"
           active-text-color="black">
-          <el-menu-item index="dealCenter" style="margin-left:0px;" ><a href="#/dealCenter">处理中心</a></el-menu-item>
+          <el-menu-item index="dealCenter" style="margin-left:0px;" ></el-menu-item>
           <el-menu-item index="2csd" style="">1231231</el-menu-item>
           <el-menu-item index="messageCenter" style="background-color:rosybrown">消息中心</el-menu-item>
           <el-menu-item index="74" style="background-color: blanchedalmond">XXXXxx</el-menu-item>
@@ -21,33 +21,20 @@
 <!--左侧栏-->
       <el-container>
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-          <router-view></router-view>
-         <!--<el-menu>-->
-          <!--<el-menu-item :index="item.id"-->
-          <!--v-for="(item,index) in menuList"-->
-          <!--v-bind:key="item.productId"-->
-          <!--&gt;{{item.productName}}-->
-          <!--</el-menu-item>-->
-         <!--</el-menu>-->
+
+         <el-menu>
+          <el-menu-item :index="item.id"
+          v-for="item in menuList"
+          v-bind:key="item.productId" >
+            <a v-bind:href="item.href" style="text-decoration:none;color:#0000FF;">{{item.productName}}</a>
+          </el-menu-item>
+         </el-menu>
 
         </el-aside>
 
 
         <el-main>
-          <el-table :data="tableData"
-                    tooltip-effect="dark"
-                    style="width: 100%">
-            <el-table-column
-              type="selection"
-              width="55">
-            </el-table-column>
-            <el-table-column prop="date" label="日期" width="140">
-            </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120">
-            </el-table-column>
-            <el-table-column prop="address" label="地址">
-            </el-table-column>
-          </el-table>
+         <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -68,28 +55,7 @@
       return {
         activeIndex: '1',
         activeIndex2: '1',
-        menuList:'',
-        tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+        menuList:''
       };
     },
     // components:{
@@ -113,7 +79,6 @@
           const _self  = this;
           _self.menuList = res.data.result;
           console.log( _self.menuList);
-
         })
       }
 
@@ -150,6 +115,5 @@
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
   }
-
 </style>
 
