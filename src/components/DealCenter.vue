@@ -1,59 +1,124 @@
 <template>
-  <el-menu :default-openeds="['1', '3']" background-color="">
-    <el-submenu index="1">
-      <template slot="title"><i class="el-icon-message"></i>导航一</template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-submenu index="2">
-      <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="2-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="2-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-submenu index="3">
-      <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="3-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="3-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-  </el-menu>
+  <el-container>
+    <el-aside width="250px">
+      <el-input size="small"
+        placeholder="输入关键字进行过滤"
+        v-model="filterText">
+      </el-input>
+      <el-tree
+        class="filter-tree"
+        :data="data2"
+        :props="defaultProps"
+        default-expand-all
+        :filter-node-method="filterNode"
+        ref="tree2">
+      </el-tree>
+
+
+    </el-aside>
+    <el-container>
+      <el-header>
+        <el-row justify="end">
+        <el-button type="primary">主要按钮</el-button>
+        <el-button type="success">成功按钮</el-button>
+        <el-button type="info">信息按钮</el-button>
+          </el-row>
+      </el-header>
+
+      <el-main>Main</el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
     export default {
-        name: "DealCenter"
+
+      watch: {
+        filterText(val) {
+          this.$refs.tree2.filter(val);
+        }
+      },
+      methods: {
+        filterNode(value, data) {
+          if (!value) return true;
+          return data.label.indexOf(value) !== -1;
+        }
+      },
+
+
+      data() {
+        return {
+          filterText: '',
+          data2: [{
+            id: 1,
+            label: '一级 1',
+            children: [{
+              id: 4,
+              label: '二级 1-1',
+              children: [{
+                id: 9,
+                label: '三级 1-1-1'
+              }, {
+                id: 10,
+                label: '三级 1-1-2'
+              }]
+            }]
+          }, {
+            id: 2,
+            label: '一级 2',
+            children: [{
+              id: 5,
+              label: '二级 2-1'
+            }, {
+              id: 6,
+              label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            children: [{
+              id: 7,
+              label: '二级 3-1'
+            }, {
+              id: 8,
+              label: '二级 3-2'
+            }]
+          }],
+          defaultProps: {
+            children: 'children',
+            label: 'label'
+          }
+        };
+      },
+
+
+      name: "DealCenter"
     }
 </script>
 
-<style scoped>
+<style>
+  .el-header, .el-footer {
+    background-color: #B3C0d1;
+    color: #222;
+    text-align: left;
+    line-height: 60px;
+  }
 
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 20px;
+  }
+
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
+
+  body > .el-container {
+    margin-bottom: 40px;
+  }
 </style>
