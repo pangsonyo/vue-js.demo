@@ -29,9 +29,7 @@
             <a v-bind:href="item.href" style="text-decoration:none;color:#0000FF;">{{item.productName}}</a>
           </el-menu-item>
          </el-menu>
-
         </el-aside>
-
 
         <el-main>
          <router-view></router-view>
@@ -39,10 +37,6 @@
       </el-container>
     </el-container>
 
-
-
-
-    <!--<router-view/>-->
   </div>
 </template>
 
@@ -75,10 +69,8 @@
       handleSelect(key, keyPath) {
         //console.log(key, keyPath);
         this.$axios.get('static/list.json').then(res=>{
-
           const _self  = this;
           _self.menuList = res.data.result;
-          console.log( _self.menuList);
         })
       }
 
