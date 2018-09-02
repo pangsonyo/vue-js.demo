@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-table :data="tableData"
+              border
               tooltip-effect="dark"
               style="width: 100%">
       <el-table-column

@@ -1,21 +1,27 @@
 import Vue from 'vue'
 import VueRouter from "vue-router"
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/views/Home.vue'
+import Main from '@/views/PeopleManage.vue'
 import DealCenter from '@/components/DealCenter'
 import Register from '@/components/Login'
 import TableTest from '@/views/tableTest'
+import Form from '@/views/UserManage'
+import Table from '@/views/Table'
 Vue.use(VueRouter)
 
 
 let routes = [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      meta: {
-        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
-      },
-      component: HelloWorld
-    },
+  {
+    path: '/',
+    component: Home,
+    name: '系统管理',
+    iconCls: 'el-icon-message',//图标样式class
+    children: [
+       { path: '/main', component: Main, name: '人员管理'},
+      { path: '/table', component: Table, name: '科室注册' },
+       { path: '/form', component: Form, name: '用户管理' }
+    ]
+  },
     {
       path: '/dealCenter',
       name: 'DealCenter',
