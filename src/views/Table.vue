@@ -1,13 +1,13 @@
 <template>
 
   <el-container>
-  <el-aside width="250px">
+  <el-aside width="250px" style="color: #D3DCE6">
     <el-input
       placeholder="输入关键字进行过滤"
       v-model="filterText">
     </el-input>
 
-    <el-tree
+    <el-tree style="background-color:#D3DCE6"
       class="filter-tree"
       :data="data2"
       :props="defaultProps"
@@ -312,9 +312,9 @@
   }
 
   .el-aside {
-    background-color: #4033;
-    color: #4033;
-
+    background-color:#D3DCE6;
+    color: #D3DCE6;
+    text-align: center;
   }
 
 </style>
