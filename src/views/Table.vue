@@ -1,27 +1,47 @@
 <template>
-  <section>
-    <!--工具条-->
-    <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+
+  <el-container>
+  <el-aside width="250px">
+    <el-input
+      placeholder="输入关键字进行过滤"
+      v-model="filterText">
+    </el-input>
+
+    <el-tree
+      class="filter-tree"
+      :data="data2"
+      :props="defaultProps"
+      default-expand-all
+      :filter-node-method="filterNode"
+      ref="tree2">
+    </el-tree>
+  </el-aside>
+  <el-container>
+
+  <el-header>
+    <el-container>
       <el-form :inline="true" :model="filters">
         <el-form-item>
-          <el-input placeholder="姓名"></el-input>
+        <el-input placeholder="姓名"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" >查询</el-button>
+        <el-button type="primary" >查询</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" >新增</el-button>
+        <el-button type="primary" >新增</el-button>
         </el-form-item>
       </el-form>
-    </el-col>
+    </el-container>
+  </el-header>
 
+  <el-main>
     <!--列表-->
-    <el-table :data="tableData" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;" border>
+    <el-table :data="tableData" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;" >
       <el-table-column type="selection" width="55">
       </el-table-column>
       <el-table-column type="index" width="60">
       </el-table-column>
-      <el-table-column prop="name" label="姓名" width="120" sortable>
+      <el-table-column prop="name" label="姓名" header-align="center"  width="120" sortable>
       </el-table-column>
       <el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
       </el-table-column>
@@ -43,10 +63,11 @@
         </template>
       </el-table-column>
     </el-table>
+    </el-main>
+    </el-container>
 
 
-
-    <!--编辑界面-->
+  <!--编辑界面-->
     <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
       <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
         <el-form-item label="姓名" prop="name">
@@ -80,7 +101,7 @@
         <el-form-item label="姓名" prop="name">
           <el-input v-model="addForm.name" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="性别">
+        <el-form-item label="性别"  >
           <el-radio-group v-model="addForm.sex">
             <el-radio class="radio" :label="1">男</el-radio>
             <el-radio class="radio" :label="0">女</el-radio>
@@ -101,17 +122,114 @@
         <el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
       </div>
     </el-dialog>
-  </section>
+  </el-container>
 </template>
 
 <script>
 
   export default {
+
+    watch: {
+      filterText(val) {
+        this.$refs.tree2.filter(val);
+      }
+    },
+
+    methods: {
+      //性别显示转换
+      formatSex: function (row, column) {
+        return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
+      },
+      handleCurrentChange(val) {
+        this.page = val;
+
+      },
+      //删除
+      handleDel: function (index, row) {
+        console.log(index, row);
+      },
+      //显示编辑界面
+      handleEdit: function (index, row) {
+        this.editFormVisible = true;
+        this.editForm = Object.assign({}, row);
+      },
+      //显示新增界面
+      handleAdd: function () {
+        this.addFormVisible = true;
+        this.addForm = {
+          name: '',
+          sex: -1,
+          age: 0,
+          birth: '',
+          addr: ''
+        };
+      },
+      //编辑
+      editSubmit: function () {
+      },
+      //新增
+      addSubmit: function () {
+      },
+      selsChange: function (sels) {
+        this.sels = sels;
+      },
+
+
+      filterNode(value, data) {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
+      }
+
+
+    },
+
+
+
     data() {
       return {
         filters: {
           name: ''
         },
+
+        filterText: '',
+
+        data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2'
+          }]
+        }],
+
+
         tableData: [{
           sex:1,
           name: '王小虎',
@@ -182,47 +300,9 @@
         }
 
       }
-    },
-    methods: {
-      //性别显示转换
-      formatSex: function (row, column) {
-        return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-      },
-      handleCurrentChange(val) {
-        this.page = val;
-
-      },
-      //删除
-      handleDel: function (index, row) {
-
-      },
-      //显示编辑界面
-      handleEdit: function (index, row) {
-        this.editFormVisible = true;
-        this.editForm = Object.assign({}, row);
-      },
-      //显示新增界面
-      handleAdd: function () {
-        this.addFormVisible = true;
-        this.addForm = {
-          name: '',
-          sex: -1,
-          age: 0,
-          birth: '',
-          addr: ''
-        };
-      },
-      //编辑
-      editSubmit: function () {
-      },
-      //新增
-      addSubmit: function () {
-      },
-      selsChange: function (sels) {
-        this.sels = sels;
-      },
-
     }
+
+
   }
 
 </script>
@@ -230,5 +310,12 @@
   table thead{
     border-bottom:2px solid #000080;
   }
+
+  .el-aside {
+    background-color: #4033;
+    color: #4033;
+
+  }
+
 </style>
 
