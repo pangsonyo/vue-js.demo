@@ -1,26 +1,24 @@
 {
   "status":"0",
-  "result":[
-    {
-      "productId":"10001",
-      "productName":"科室注册",
-      "prodcutPrice":"2499",
-      "prodcutImg":"mi6.jpg",
-      "href":"#/dealCenter"
-    },
-    {
-      "productId":"10002",
-      "productName":"人员管理",
-      "prodcutPrice":"3999",
-      "prodcutImg":"note.jpg",
-      "href":"#/tableTest"
-    },
-    {
-      "productId":"10003",
-      "productName":"用户管理",
-      "prodcutPrice":"2499",
-      "prodcutImg":"mi6.jpg"
-    }
-
-    ]
+  "result":[{
+    "date": "2016-05-03",
+    "name": "王小一",
+    "address": "上海市普陀区金沙江路 1518 弄"
+  }, {
+    "date": "2016-05-02",
+    "name": "王小二",
+    "address": "上海市普陀区金沙江路 1518 弄"
+  }, {
+    "date": "2016-05-04",
+    "name": "王小三",
+    "address": "上海市普陀区金沙江路 1518 弄"
+  }, {
+    "date": "2016-05-01",
+    "name": "王小四",
+    "address": "上海市普陀区金沙江路 1518 弄"
+  }, {
+    "date": "2016-05-08",
+    "name": "王小五",
+    "address": "上海市普陀区金沙江路 1518 弄"
+  }]
 }
