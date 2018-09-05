@@ -36,7 +36,7 @@
 
   <el-main>
     <!--列表-->
-    <el-table :data="tableData" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;" >
+    <el-table :data="tableData" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;"  @cell-dblclick="viewForm">
       <el-table-column type="selection" width="55">
       </el-table-column>
       <el-table-column type="index" width="60">
@@ -57,7 +57,7 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.row)">删除</el-button>
+            @click="handleDelete(scope.$index, tableData)">删除</el-button><!-- @click="handleDelete(scope.row)"-->
         </template>
       </el-table-column>
     </el-table>
@@ -142,8 +142,8 @@
 
       },
       //删除
-      handleDel: function (row) {
-        console.log(row);
+      handleDelete(index, row) {
+        row.splice(index, 1);
       },
       //显示编辑界面
       handleClick: function (row,_index) {
@@ -175,11 +175,15 @@
       selsChange: function (sels) {
         this.sels = sels;
       },
-
-
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
+      },
+      viewForm(row, column, cell, event){
+        this.editForm=row;
+        console.log(row);
+        //显示弹窗
+        this.editFormVisible=true;
       }
     },
 
