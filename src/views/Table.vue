@@ -53,13 +53,11 @@
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button @click="handleClick(scope.row)" type="primary" size="mini">编辑</el-button>
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -68,7 +66,7 @@
 
 
   <!--编辑界面-->
-    <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+    <el-dialog title="编辑" v-model="editFormVisible" :visible.sync="editFormVisible">
       <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="editForm.name" auto-complete="off"></el-input>
@@ -83,10 +81,10 @@
           <el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
         </el-form-item>
         <el-form-item label="生日">
-          <el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
+          <el-date-picker type="date" placeholder="选择日期" v-model="editForm.date"></el-date-picker>
         </el-form-item>
         <el-form-item label="地址">
-          <el-input type="address"></el-input>
+          <el-input type="address" v-model="editForm.address" ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -144,13 +142,18 @@
 
       },
       //删除
-      handleDel: function (index, row) {
-        console.log(index, row);
+      handleDel: function (row) {
+        console.log(row);
       },
       //显示编辑界面
-      handleEdit: function (index, row) {
-        this.editFormVisible = true;
-        this.editForm = Object.assign({}, row);
+      handleClick: function (row,_index) {
+        // //记录索引
+        // this.listIndex=_index;
+        // //记录数据
+         this.editForm=row;
+         console.log(row);
+        //显示弹窗
+         this.editFormVisible=true;
       },
       //显示新增界面
       handleAdd: function () {
@@ -198,7 +201,8 @@
         listLoading: false,
         sels: [],//列表选中列
 
-        editFormVisible: true,//编辑界面是否显示
+        editFormVisible: false,//编辑界面是否显示
+
         editLoading: false,
         editFormRules: {
           name: [
@@ -207,11 +211,11 @@
         },
         //编辑界面数据
         editForm: {
-          id: 0,
+          id: '',
           name: '',
-          sex: -1,
-          age: 0,
-          birth: '',
+          sex: '',
+          age: '',
+          date: '',
           addr: ''
         },
 
