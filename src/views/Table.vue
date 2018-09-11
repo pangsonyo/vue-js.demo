@@ -42,7 +42,7 @@
       </el-table-column>
       <el-table-column type="index" width="60">
       </el-table-column>
-      <el-table-column prop="name" label="机构名称"   width="120" sortable>
+      <el-table-column prop="orgName" label="机构名称"   width="120" sortable>
       </el-table-column>
       <el-table-column prop="sex" label="是否营业" width="100" :formatter="formatSex" sortable>
       </el-table-column>
@@ -67,8 +67,8 @@
   <!--编辑界面-->
     <el-dialog title="编辑" v-model="editFormVisible" :visible.sync="editFormVisible">
       <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-        <el-form-item label="机构名称" prop="name">
-          <el-input v-model="editForm.name" auto-complete="off"></el-input>
+        <el-form-item label="机构名称" prop="orgName">
+          <el-input v-model="editForm.orgName" auto-complete="off"></el-input>
         </el-form-item>
         <!--<el-form-item label="性别">-->
           <!--<el-radio-group v-model="editForm.sex">-->
@@ -95,8 +95,8 @@
     <!--新增界面-->
     <el-dialog title="新增" v-model="addFormVisible" :visible.sync="addFormVisible">
       <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-        <el-form-item label="机构名称" prop="name">
-          <el-input v-model="addForm.name" auto-complete="off"></el-input>
+        <el-form-item label="机构名称" prop="orgName">
+          <el-input v-model="addForm.orgName" auto-complete="off"></el-input>
         </el-form-item>
         <!--<el-form-item label="性别"  >-->
           <!--<el-radio-group v-model="addForm.sex">-->
@@ -159,7 +159,6 @@
         console.log(this.tableData[0].parentid);
         this.addForm.parentid = this.tableData[0].parentid;
 
-
       },
 
       selsChange: function (sels) {
@@ -183,21 +182,23 @@
 
       //add 提交表单
       addSubmit:function () {
-        this.$refs[addForm].validate((valid) => {
-          if (valid) {
-            let _this = this
-            this.$ajax.post('请求地址', _this.addForm)
+
+        // this.$refs[addForm].validate((valid) => {
+        //   if (valid) {
+            let _this = this;
+            console.log( _this.addForm);
+            this.$axios.post('http://192.168.7.236:8080/createOrg', _this.addForm)
               .then((response) => {
                 this.$message.success('注册成功！')
                 this.$refs[addForm].resetFields()
                 // 跳转到登录页
                 // this.$router.push({path: '/'})
               })
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
+          // } else {
+          //   console.log('error submit!!')
+          //   return false
+          // }
+        //})
       }
 
     },
@@ -231,7 +232,7 @@
         //编辑界面数据
         editForm: {
           id: '',
-          name: '',
+          orgName: '',
           sex: '',
           parentid: '',
           date: '',
@@ -248,7 +249,7 @@
         },
         //新增界面数据
         addForm: {
-          name: '',
+          orgName: '',
           sex: '',
           parentid: '',
           date: '',
