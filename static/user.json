@@ -1,0 +1,34 @@
+{
+  "status":"0",
+  "result":[{
+    "createDate": "2016-05-03",
+    "userName": "王小一",
+    "userId": "010",
+    "isUse":"1",
+    "gender":1
+  }, {
+    "createDate": "2016-05-03",
+    "userName": "王小二",
+    "userId": "011",
+    "isUse":"1",
+    "gender":0
+  }, {
+    "createDate": "2016-05-03",
+    "userName": "王小三",
+    "userId": "012",
+    "isUse":"1",
+    "gender":0
+  }, {
+    "createDate": "2016-05-03",
+    "userName": "王小四",
+    "userId": "013",
+    "isUse":"1",
+    "gender":0
+  }, {
+    "createDate": "2016-05-03",
+    "userName": "王小五",
+    "userId": "014",
+    "isUse":"1",
+    "gender":1
+  }]
+}

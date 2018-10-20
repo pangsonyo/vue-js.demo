@@ -2,27 +2,27 @@
   "status":"0",
   "result":[{
     "date": "2016-05-03",
-    "orgName": "王小一",
+    "orgName": "门诊科",
     "orgAddr": "上海市普陀区金沙江路 1518 弄",
     "parentid":"01"
   }, {
     "date": "2016-05-02",
-    "orgName": "王小二",
+    "orgName": "五官科",
     "orgAddr": "上海市普陀区金沙江路 1518 弄",
     "parentid":"01"
   }, {
     "date": "2016-05-04",
-    "orgName": "王小三",
+    "orgName": "信息科",
     "orgAddr": "上海市普陀区金沙江路 1518 弄",
     "parentid":"01"
   }, {
     "date": "2016-05-01",
-    "orgName": "王小四",
+    "orgName": "中医科",
     "orgAddr": "上海市普陀区金沙江路 1518 弄",
     "parentid":"01"
   }, {
     "date": "2016-05-08",
-    "orgName": "王小五",
+    "orgName": "内科",
     "orgAddr": "上海市普陀区金沙江路 1518 弄",
     "parentid":"01"
   }]

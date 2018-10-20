@@ -1,7 +1,7 @@
 <template>
 
   <el-container>
-  <el-aside width="250px" style="color: #D3DCE6">
+  <el-aside width="250px"  style="color: #D3DCE6">
     <el-input
       placeholder="输入关键字进行过滤"
       v-model="filterText">
@@ -23,7 +23,7 @@
     <el-container>
       <el-form :inline="true" :model="filters">
         <el-form-item>
-        <el-input placeholder="姓名"></el-input>
+        <el-input placeholder="机构名称"></el-input>
         </el-form-item>
         <el-form-item>
         <el-button type="primary" >查询</el-button>
@@ -42,7 +42,7 @@
       </el-table-column>
       <el-table-column type="index" width="60">
       </el-table-column>
-      <el-table-column prop="orgName" label="机构名称"   width="120" sortable>
+      <el-table-column prop="orgName" label="科室名称"   width="120" sortable>
       </el-table-column>
       <el-table-column prop="sex" label="是否营业" width="100" :formatter="formatSex" sortable>
       </el-table-column>
@@ -132,13 +132,9 @@
     },
 
     methods: {
-      //性别显示转换
-      formatSex: function (row, column) {
-        return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-      },
+
       handleCurrentChange(val) {
         this.page = val;
-
       },
       //删除
       handleDelete(index, row) {
@@ -183,8 +179,7 @@
       //add 提交表单
       addSubmit:function () {
 
-        // this.$refs[addForm].validate((valid) => {
-        //   if (valid) {
+
             let _this = this;
             console.log( _this.addForm);
             this.$axios.post('http://192.168.7.236:8080/createOrg', _this.addForm)
@@ -194,11 +189,6 @@
                 // 跳转到登录页
                 // this.$router.push({path: '/'})
               })
-          // } else {
-          //   console.log('error submit!!')
-          //   return false
-          // }
-        //})
       }
 
     },
@@ -259,20 +249,19 @@
       }
     },
 
-      created:function() {
-        this.$axios.get('static/list.json').then(res => {
-          console.log(res.data.result)
-          const _self = this;
-          _self.tableData = res.data.result;
-        })
-
-        this.$axios.get('static/tree.json').then(res => {
-          console.log(res.data.result)
-          const _self = this;
-          _self.data2 = res.data.result;
-        })
-
-      }
+    //初始化页面时 加载的动作  左侧树和右侧列表
+    created:function() {
+      this.$axios.get('static/list.json').then(res => {
+        console.log(res.data.result)
+        const _self = this;
+        _self.tableData = res.data.result;
+      });
+      this.$axios.get('static/tree.json').then(res => {
+        console.log(res.data.result)
+        const _self = this;
+        _self.data2 = res.data.result;
+      });
+    }
 
 
     }

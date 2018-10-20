@@ -1,0 +1,22 @@
+{
+  "status":"0",
+  "result":[{
+    "id": "1",
+    "parentid":"",
+    "label": "广州市",
+    "children": [{
+      "id": 4,
+      "label": "天河区第一人民医院",
+      "parentid":"1",
+      "children": [{
+        "id": 9,
+        "label": "外科",
+        "parentid":"4"
+      }, {
+        "id": 10,
+        "label": "妇产科",
+        "parentid":"4"
+      }]
+    }]
+  }]
+}
